@@ -1,0 +1,59 @@
+# Profile Panel
+welcome_guest: Welcome, guest!
+settings: Settings
+logout: Logout
+
+# Login
+login: Login
+# login_remember_me: Remember Me!
+
+# Navbar
+beatmaps: Beatmaps
+dl_switcher: Download Server Switcher
+search: Search leaderboard and beatmaps...
+messages: Messages
+
+# Settings
+email: E-Mail
+username: Username
+password: Password
+load_more: Load More
+
+# Leaderboard
+leaderboard: Leaderboard
+leaderboard_desc: a place where our TOP 50 are listed! (extendable)
+
+leaderboard_mode_osu: Standard
+leaderboard_mode_taiko: Taiko
+leaderboard_mode_ctb: Catch The Beat
+leaderboard_mode_mania: Mania
+
+leaderboard_position: Position
+leaderboard_player: Player
+leaderboard_performance: Performance
+leaderboard_accuracy: Accuracy
+leaderboard_playcount: Playcount
+
+# Help
+help: Help
+
+
+# Signup
+signup: Signup
+signup_prepare: Prepare yourself...
+signup_description: You're almost ready to start playing on the world's most awesome
+  osu! server...
+signup_fun: Signup here and begin the explosive fun...
+signup_step_number: Step
+signup_step_o: It's a three step process...
+signup_step_one: Sign up with your chosen username and password and verify your email
+  here...
+signup_step_two: Download our server switcher and toggle the switch (restarting osu!
+  if it was open prior to toggling the switch.)
+signup_step_three: Login to the osu! client with the account information you provided
+  here and enjoy!
+signup_confirm: Confirm Password
+signup_create_account: Create Account!
+signup_verification_email_send: Verification email send.
+signup_dont_close: Please don't close this window while you're verifing your email!
+

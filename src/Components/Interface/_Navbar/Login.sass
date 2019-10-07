@@ -1,0 +1,88 @@
+@import "../../../Style/colors"
+
+#login
+    font-size: 10px
+    display: inline-block
+    text-align: right
+    position: absolute
+    right: 40px
+    top: 26.5px
+    .dropdown-content
+        background-color: $TEXT-COLOR-SECONDARY
+        border-radius: 1.5em
+        padding: 10px
+        h1
+            padding: 5px
+            text-align: left
+            font-size: 1.5em
+            font-weight: bolder
+            color: white
+
+    .dropdown-content:after
+        content: ''
+        position: absolute
+        top: 0
+        left: 20%
+        width: 0
+        height: 0
+        border: 15px solid transparent
+        border-bottom-color: $TEXT-COLOR-SECONDARY
+        border-top: 0
+        border-left: 0
+        margin-left: -27px
+        margin-top: -15px
+
+#login input
+    font-family: 'Exo', sans-serif
+    margin-top: 3px
+    border: none
+    width: 165px
+    height: 20px
+    text-align: right
+    font-size: 15px
+    text-shadow: 1px 1px 2px rgba(0,0,0,1)
+    background-color: rgba(0,0,0,0.25)
+    border-radius: 5px
+    padding: 8px
+    color: white
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25)
+
+    &:hover
+        background-color: rgba(0,0,0,0.35)
+        box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.35)
+
+    &:focus
+        background-color: rgba(0,0,0,0.55)
+
+    &::placeholder
+        color: rgba(255,255,255,0.25)
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25)
+        position: relative
+        top: 0px
+        font-size: 15px
+        text-align: center
+        font-style: italic
+
+    &::-moz-placeholder
+        color: rgba(255,255,255,0.45)
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.45)
+
+    &:-ms-input-placeholder
+        color: rgba(255,255,255,0.25)
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25)
+        font-size: 13px
+        height: 35px
+        font-style: italic
+        text-align: center
+
+    &[type=button], &[type=submit], &[type=reset]
+        width: 30%
+        height: 100%
+
+    &[type=checkbox]
+        position: absolute
+        width: 10%
+        left: 6px
+        bottom: 15px
+        box-shadow: none
+        text-align: right

@@ -1,0 +1,23 @@
+.dropdown
+    position: relative
+    display: inline-block
+
+    &:hover
+        text-decoration: underline
+
+.show .dropdown-content
+    display: block
+
+.dropdown .hoverable
+    &:hover .dropdown-content
+        display: block
+
+.dropdown-content
+    display: none
+    position: absolute
+    background-color: #000000
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2)
+    z-index: 5000000000000
+
+    margin: auto
+    left: 0

@@ -1,0 +1,24 @@
+.loading
+  width: 100px
+  height: 100px
+  text-align: center
+
+  position: absolute
+  left: 50%
+  top: 50%
+  margin-left: -50px
+  margin-top: -110px
+
+  background-image: url('../../Assets/Images/Interface/logo.png')
+  background-size: 100%
+  animation: load 1s infinite forwards
+
+.hiddenLoading
+  display: none
+
+@keyframes load
+  from
+    transform: scale(1) rotate(360deg)
+
+  60%
+    transform: scale(1.25) rotate(0deg)
