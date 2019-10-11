@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Progress from "react-progress-2";
 import "react-progress-2/main.css";
 import { withRouter } from "react-router-dom";
+import { UpdateConfig } from "../Actions/GlobalConfigActions";
 import { UpdateActiveUser } from "../Actions/UserActions";
 import Navbar from "../Components/Interface/_Navbar/Navbar";
 import Footbar from "../Components/Interface/Footbar/Footbar";
@@ -13,6 +14,7 @@ class App extends Component {
     if (cookies.get("AUTH_TOKEN")) {
       UpdateActiveUser().then(SiteStateStore.dispatch);
     }
+    UpdateConfig().then(SiteStateStore.dispatch);
   }
 
   public componentDidUpdate() {

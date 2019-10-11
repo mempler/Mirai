@@ -1,0 +1,70 @@
+#footer
+  text-align: center
+  padding-top: 10px
+  padding-right: 30px
+  font-size: 12px
+  color: white
+  text-shadow: 1px 0px 1px rgba(0, 0, 0, 1)
+  background: url("../../../Assets/Images/Background/dark_background.png")
+  height: 45px
+  position: relative
+  width: calc(100% - 30px)
+  top: 30px
+  bottom: 0
+  box-shadow: inset 0px 6px 6px -6px rgba(0, 0, 0, 1)
+
+  & a
+    color: white
+    text-decoration: none
+
+  & a:hover
+    text-decoration: underline
+
+.navlink
+  position: relative
+  top: 0px
+  margin-left: 20px
+
+  & a
+    color: white
+    text-decoration: none
+
+  & a:hover
+    color: rgb(255, 191, 0)
+    text-decoration: none
+
+.navCaretMargin
+  display: inline-block
+  margin-left: 3px
+
+.discord-bg
+  position: absolute
+  bottom: 20px
+  width: 30px
+  left: 2px
+  background-color: white
+  height: 25px
+  transition: 0.1s
+
+.discord-icon
+  position: absolute
+  bottom: 10px
+  z-index: 500
+
+.discord
+  position: fixed
+  z-index: 500
+  font-size: 40px
+  bottom: 0%
+  left: 1%
+  transition: 0.1s
+  color: black
+  filter: drop-shadow( 1px 2px 2px rgba(0, 0, 0, .5))
+
+  &:hover
+    color: rgb(96, 131, 255)
+    transition: 0.1s
+    .discord-bg
+      background-color: white
+      bottom: 20px
+      left: 2px

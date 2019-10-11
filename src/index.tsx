@@ -8,6 +8,8 @@ import { SiteStateStore } from "./globals";
 import App from "./Pages/App";
 import * as serviceWorker from "./serviceWorker";
 import "./Style/index.sass";
+import { WSAPI, PacketType, WSPacketID } from "./API/WSAPI";
+import { ITopLeaderboard } from "./API/Leaderboard/TopLeaderboard";
 
 i18n.on("initialized", async () => {
     ReactDOM.render((
@@ -20,7 +22,20 @@ i18n.on("initialized", async () => {
     ), document.getElementById("root"));
 });
 
+const wsapi = new WSAPI();
+wsapi.on("connected", (api) => {
+    api.Request(PacketType.REQ, WSPacketID.TopLeaderboard, {
+        mode: 0,
+        offset: 0,
+    }).on("data", (data: ITopLeaderboard) => {
+
+    });
+})
+
+
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register({
+
+});

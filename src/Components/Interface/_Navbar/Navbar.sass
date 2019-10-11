@@ -21,7 +21,7 @@
 #logo
   position: absolute
   top: 8px
-  left: 0px
+  left: 10px
   color: white
   font-size: 20px
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 1)
@@ -182,3 +182,60 @@
 
   &Nested .rightSide .right .fa-envelope
     margin-right: 5px
+
+@media screen and ( max-width: "960px" )
+  #searchbox
+    display: none
+
+  #navbar
+    position: absolute
+
+  .searchIcon
+    position: absolute
+    right: 270px
+    top: 55px
+    font-size: 20px
+    display: block
+
+  #container
+    position: absolute
+    top: 80px
+
+  #advanced
+    top: 70px
+
+@media screen and ( max-width: "620px" )
+  #navbar
+    #leftnavlinks
+      left: 0px
+    .beatmaps
+      display: none
+
+@media screen and ( max-width: "550px" )
+  #navbar
+    #rightnavlinks,
+    #leftnavlinks
+      display: none
+    #navAvatar
+      top: 37px
+      right: 80px
+
+    .searchIcon
+      position: absolute
+      right: 160px
+      top: 50px
+      font-size: 40px
+      display: block
+
+    .menuBars
+      position: absolute
+      right: 10px
+      top: 45px
+      width: 50px
+      height: 50px
+      display: block
+
+    .help,
+    .beatmaps,
+    .leaderboard
+      display: none

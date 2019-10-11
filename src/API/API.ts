@@ -1,8 +1,12 @@
 import { API_ENDPOINT, cookies } from "../globals";
 import { SerializeURI } from "../Utils/StringUtils";
+import { ErrorResponse } from "./ErrorResponse";
 
 export enum ErrorCode {
+    Success = 0,
+    EMailVerification = 100,
     InvalidUser = 401,
+    Recaptcha = 450,
 }
 
 export declare interface IErrorResponse {
@@ -33,8 +37,8 @@ export class APIRequest<T> {
 
         const jsonResponse = await response.json();
 
-        if ((jsonResponse as IErrorResponse).code) {
-            throw jsonResponse as IErrorResponse;
+        if ((jsonResponse as IErrorResponse).message) {
+            throw new ErrorResponse(jsonResponse);
         }
 
         return jsonResponse as T;

@@ -1,4 +1,4 @@
-import { faCaretRight, faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faCaretRight, faEnvelope, faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -26,17 +26,17 @@ class Navbar extends Component<IUserState> {
             </form>
             <div id="leftNav">
               <div id="leftnavlinks">
-                <span className="navlink">
+                <span className="navlink help">
                   <Link to="/help">{I18n.t("help")}
                     &nbsp;<FontAwesomeIcon className="navCaretMargin" icon={faCaretRight} />
                   </Link>
                 </span>
-                <span className="navlink">
+                <span className="navlink leaderboard">
                   <Link to="/leaderboard">{I18n.t("leaderboard")}
                     &nbsp;<FontAwesomeIcon className="navCaretMargin" icon={faCaretRight} />
                   </Link>
                 </span>
-                <span className="navlink">
+                <span className="navlink beatmaps">
                   <Link to="/beatmaps">{I18n.t("beatmaps")}
                     &nbsp;<FontAwesomeIcon className="navCaretMargin" icon={faCaretRight} />
                   </Link>
@@ -44,6 +44,8 @@ class Navbar extends Component<IUserState> {
               </div>
             </div>
             <div id="rightNav">
+              <FontAwesomeIcon className="searchIcon" icon={faSearch} />
+              <FontAwesomeIcon className="menuBars" icon={faBars} />
               <div id="rightnavlinks">
                 <Profile />
               </div>

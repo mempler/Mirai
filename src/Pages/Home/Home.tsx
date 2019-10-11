@@ -43,28 +43,32 @@ class Home extends Component<any, IState> {
   }
 
   public setData = async () => {
-    if (!this.initialData) {
-      Progress.show();
-    }
+    try {
+      if (!this.initialData) {
+        Progress.show();
+      }
 
-    const status = new ServerStatusRequest();
-    const latestDonis = new LatestDonatorsRequest();
+      const status = new ServerStatusRequest();
+      const latestDonis = new LatestDonatorsRequest();
 
-    const statusResult = await status.Perform();
-    const doniResult = await latestDonis.Perform();
+      const statusResult = await status.Perform();
+      const doniResult = await latestDonis.Perform();
 
-    statusResult.TotalPerformancePoints = Math.round(statusResult.TotalPerformancePoints * 100) / 100;
-    statusResult.AverageAccuracy = Math.round(statusResult.AverageAccuracy * 10000) / 10000 * 100;
-    this.setState({
-      ServerStatus: statusResult,
-      LatestDonators: doniResult,
-    });
+      statusResult.TotalPerformancePoints = Math.round(statusResult.TotalPerformancePoints * 100) / 100;
+      statusResult.AverageAccuracy = Math.round(statusResult.AverageAccuracy * 10000) / 10000 * 100;
+      this.setState({
+        ServerStatus: statusResult,
+        LatestDonators: doniResult,
+      });
 
-    if (!this.initialData) {
+      if (!this.initialData) {
+        Progress.hide();
+      }
+
+      this.initialData = true;
+    } finally {
       Progress.hide();
     }
-
-    this.initialData = true;
   }
 
   public componentDidMount() {
@@ -192,7 +196,7 @@ class Home extends Component<any, IState> {
                 <td>
                   <div className="infoBar gray">
                     <h2>Average Accuracy</h2>
-                    <p>{this.state.ServerStatus.AverageAccuracy}%</p>
+                    <p>{Math.round(this.state.ServerStatus.AverageAccuracy * 100) / 100}%</p>
                   </div>
                 </td>
               </tr>

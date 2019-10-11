@@ -1,5 +1,6 @@
 import Progress from "react-progress-2";
 import { AnyAction, Reducer } from "redux";
+import TokenAuthRequest from "../API/OAuth";
 import MeRequest from "../API/Users/Me";
 import { IUser } from "../API/Users/User";
 import { cookies } from "../globals";
@@ -12,6 +13,7 @@ export interface IUserState {
 export enum UserActionTypes {
     UPDATE = "user.update",
     LOGOUT = "user.logout",
+    LOGIN = "user.login",
 }
 
 export interface IUserAction extends AnyAction {
@@ -69,10 +71,34 @@ export const LogoutActiveUser = () => {
     }
 };
 
+export const LoginActiveUser = async (username: string, password: string) => {
+    try {
+        Progress.show();
+
+        const authReq = new TokenAuthRequest(username, password);
+        const result = await authReq.Perform();
+
+        const expireDate = new Date();
+        expireDate.setSeconds(expireDate.getSeconds() + result.expires_in);
+
+        cookies.set("AUTH_TOKEN", result.access_token, {
+            expires: expireDate,
+        });
+
+        const meReq = new MeRequest();
+
+        return { type: UserActionTypes.LOGIN, User: await meReq.Perform() } as IUserAction;
+    } finally {
+        Progress.hide();
+    }
+};
+
 export const UserReducer: Reducer<IUserState, IUserAction> = (state = EmptyUserState, action) => {
     switch (action.type) {
         case UserActionTypes.UPDATE:
             return { User: action.User, IsLoggedIn: action.IsLoggedIn };
+        case UserActionTypes.LOGIN:
+            return { User: action.User, IsLoggedIn: true };
         case UserActionTypes.LOGOUT:
             return { User: EmptyUser, IsLoggedIn: false };
 

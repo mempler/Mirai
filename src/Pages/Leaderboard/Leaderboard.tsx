@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import {ILeaderboardState, LoadMoreLeaderboard, UpdateLeaderboard} from "../../Actions/LeaderboardActions";
+import { ILeaderboardState, LoadMoreLeaderboard, UpdateLeaderboard } from "../../Actions/LeaderboardActions";
 import FlagIcon from "../../Components/FlagIcon";
 import I18n from "../../Components/I18n";
-import {AVATAR_ENDPOINT, SiteStateStore} from "../../globals";
+import { AVATAR_ENDPOINT, SiteStateStore } from "../../globals";
 import { GetLevelByTotalScore } from "../../Utils/LevelUtility";
 import { NumberWithCommas } from "../../Utils/StringUtils";
 import "./Leaderboard.sass";
@@ -29,8 +29,30 @@ class Leaderboard extends Component<ILeaderboardState> {
         this.ChangeMode(0);
     }
 
+    public MouseHover(id: number, e: React.MouseEvent<HTMLTableDataCellElement, MouseEvent>) {
+        const avatar = document.getElementById("LBAvatar") as HTMLImageElement | null;
+        if (avatar == null) {
+            return;
+        }
+        avatar.src = AVATAR_ENDPOINT + "/" + id;
+
+        avatar.style.left = (e.clientX - 64 / 2) + "px";
+        avatar.style.top = (e.clientY - 128 * 2) + "px";
+        avatar.style.display = "block";
+    }
+
+    public MouseLeave(e: React.MouseEvent<HTMLTableDataCellElement, MouseEvent>) {
+        const avatar = document.getElementById("LBAvatar") as HTMLImageElement | null;
+        if (avatar == null) {
+            return;
+        }
+        avatar.style.display = "none";
+    }
+
     public render() {
         const entries = [];
+
+        this.props.Entries.sort((x, y) => x.Performance > y.Performance ? -1 : 0);
 
         for (let i = 0; i < this.props.Entries.length; i++) {
             const e = this.props.Entries[i];
@@ -40,24 +62,24 @@ class Leaderboard extends Component<ILeaderboardState> {
                     <td>
                         #{i + 1}
                     </td>
-                    <td>
-                        <FlagIcon code={e.Country} />
-                        <Link to={"/u/" + e.Id}>
-                            <div className="dropdown hoverable">
+                    <td onMouseLeave={this.MouseLeave} onMouseMove={(ev) => this.MouseHover(e.Id, ev)}>
+                        <div style={{ width: "100%", height: "100%" }}>
+                            <FlagIcon code={e.Country} />
+                            <Link
+                                id={e.Id + ""}
+                                to={"/u/" + e.Id}>
                                 <span>{e.Username}</span>
-                                <div className="dropdown-content">
-                                    <img src={AVATAR_ENDPOINT + e.Id} alt="Avatar" />
-                                </div>
-                            </div>
-                        </Link>
+                            </Link>
+                        </div>
+
                     </td>
                     <td>
                         <b>{Math.round(e.Performance)}pp</b> ({NumberWithCommas(e.RankedScore)})
                     </td>
                     <td>
-                        {Math.round(e.Performance * 100) / 100}%
+                        {Math.round(e.Accuracy * 10000) / 100}%
                     </td>
-                    <td>
+                    <td className="PlayCount">
                         {NumberWithCommas(e.PlayCount)} (lv. {GetLevelByTotalScore(e.TotalScore)})
                     </td>
                 </tr>,
@@ -71,25 +93,12 @@ class Leaderboard extends Component<ILeaderboardState> {
                 <h2>{I18n.t("leaderboard_desc")}</h2>
                 <br />
 
+                <img style={{ display: "none", width: 128, height: 128, position: "absolute", zIndex: 50000000000 }} id="LBAvatar" alt="Avatar" />
                 <div className="modeButtons">
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>
-                                    <div className="btn" onClick={() => this.ChangeMode(0)}>{I18n.t("leaderboard_mode_osu")}</div>
-                                </td>
-                                <td>
-                                    <div className="btn" onClick={() => this.ChangeMode(1)}>{I18n.t("leaderboard_mode_taiko")}</div>
-                                </td>
-                                <td>
-                                    <div className="btn" onClick={() => this.ChangeMode(2)}>{I18n.t("leaderboard_mode_ctb")}</div>
-                                </td>
-                                <td>
-                                    <div className="btn" onClick={() => this.ChangeMode(3)}>{I18n.t("leaderboard_mode_mania")}</div>
-                                </td>
-                            </tr>
-                        </thead>
-                    </table>
+                    <div className="btn" onClick={() => this.ChangeMode(0)}>{I18n.t("leaderboard_mode_osu")}</div>
+                    <div className="btn" onClick={() => this.ChangeMode(1)}>{I18n.t("leaderboard_mode_taiko")}</div>
+                    <div className="btn" onClick={() => this.ChangeMode(2)}>{I18n.t("leaderboard_mode_ctb")}</div>
+                    <div className="btn" onClick={() => this.ChangeMode(3)}>{I18n.t("leaderboard_mode_mania")}</div>
                 </div>
 
                 <div className="lb">
@@ -108,7 +117,7 @@ class Leaderboard extends Component<ILeaderboardState> {
                                 <td>
                                     {I18n.t("leaderboard_accuracy")}
                                 </td>
-                                <td>
+                                <td className="PlayCount">
                                     {I18n.t("leaderboard_playcount")}
                                 </td>
                             </tr>
