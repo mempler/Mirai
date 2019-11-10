@@ -6,12 +6,12 @@ import { UpdateConfig } from "../Actions/GlobalConfigActions";
 import { UpdateActiveUser } from "../Actions/UserActions";
 import Navbar from "../Components/Interface/_Navbar/Navbar";
 import Footbar from "../Components/Interface/Footbar/Footbar";
-import { cookies, SiteStateStore } from "../globals";
+import { SiteStateStore } from "../globals";
 import Routes from "./Routes";
 
 class App extends Component {
   public componentDidMount() {
-    if (cookies.get("AUTH_TOKEN")) {
+    if (localStorage.getItem("AUTH_TOKEN")) {
       UpdateActiveUser().then(SiteStateStore.dispatch);
     }
     UpdateConfig().then(SiteStateStore.dispatch);
@@ -37,4 +37,4 @@ class App extends Component {
   }
 }
 
-export default withRouter((props) => <App {...props} />);
+export default withRouter(props => <App {...props} />);
